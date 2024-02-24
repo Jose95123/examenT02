@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Registro de Película</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+
+<body>
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+		<a class="navbar-brand" href="#">Mi Aplicación</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+			aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarNav">
+			<ul class="navbar-nav">
+				<li class="nav-item active">
+					<a class="nav-link" href="/examen/index">Inicio <span class="sr-only">(current)</span></a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#">Acerca de</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="/peliculas/getAllPeliculas">Peliculas</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="/generos/list">Generos</a>
+				</li>
+			</ul>
+		</div>
+	</nav>
+
+	<div class="container mt-5">
+		<h1 class="mt-5">Registro de Película</h1>
+
+		<form th:object="${pelicula}" method="post" action="/peliculas/register">
+
+			<div class="form-group">
+				<label for="nombre">Nombre:</label>
+				<input type="text" class="form-control" id="nombre" name="nombre" th:field="*{nombre}" required />
+			</div>
+
+			<div class="form-group">
+				<label for="director">Director:</label>
+				<input type="text" class="form-control" id="director" name="director" th:field="*{director}" required />
+			</div>
+
+			<div class="form-group">
+				<label for="fechaEstreno">Fecha de Estreno:</label>
+				<input type="datetime-local" class="form-control" id="fechaEstreno" name="fechaEstreno"
+					th:field="*{fechaEstreno}" required />
+			</div>
+
+
+			<div class="form-group">
+				<label for="genero">Género:</label>
+				<select class="form-control" id="genero" name="genero" th:field="*{idgenero}" required>
+					<option th:each="genero : ${generos}" th:value="${genero.idgenero}" th:text="${genero.nombre}">
+					</option>
+				</select>
+			</div>
+
+			<button type="submit" class="btn btn-primary">Guardar Película</button>
+
+		</form>
+	</div>
+
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>
